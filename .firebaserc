@@ -1,7 +1,5 @@
 {
   "projects": {
-    "default": "polor-ar",
-    "staging": "polor-ar"
-  },
-  "targets": {}
+    "default": "polor-ar"
+  }
 }
