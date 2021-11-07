@@ -6,6 +6,7 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 
 ### 看看 有沒有安裝 
 [C:\隨意]>npm install -g firebase-tools
+
 [C:\隨意]>firebase -V 
 有的話 有顯示版本
 
