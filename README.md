@@ -5,6 +5,8 @@
 https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beginner-service-account-key-json-node-server-d61e803d6cc8
 
 ### 看看 有沒有安裝 
+[C:\隨意]>npm install firebase-admin --save
+
 [C:\隨意]>npm install -g firebase-tools
 
 [C:\隨意]>firebase -V 
