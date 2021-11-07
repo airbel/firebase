@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="UTF-8">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script>
+        firebase.initializeApp({
+          apiKey: 'AIzaSyCsarHyN-RSBtM26l6_goiOgB7bEvZ6vi8',
+          authDomain: 'polor-ar.firebaseapp.com',
+          projectId: 'polor-ar'
+        });
+        const db = firebase.firestore();
+
+        function awork(){
+            // const db = firebase.firestore();
+            db.collection('goobela').get().then(result => {
+
+            Array.prototype.forEach.call(result.docs, r => {
+            console.log(r.id)
+            console.log(r.data())
+            })
+          })
+        }
+      </script>
+
+
     <title>Document</title>
 </head>
 <body>
 <P>要把Firebase弄起來</P>
-<script src="index.js"></script>
+<!-- <script src="index.js"></script> -->
 
 </body>
 </html>
