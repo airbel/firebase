@@ -27,5 +27,8 @@ firebase projects:list
 ### 把 Firebase 初始化
 firebase init
 
+### 安裝不成功
+要把node更新到最新版，很多問題就解決了
+
 ### 參考筆記:
 https://www.letswrite.tw/cloud-functions-init/
