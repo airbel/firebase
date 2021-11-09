@@ -28,7 +28,7 @@ firebase projects:list
 firebase init
 
 ### 安裝不成功
-![GITHUB]( https://github.com/airbel/firebase/blob/master/2021-11-07.png "出現錯誤")
+![GITHUB]( https://github.com/airbel/firebase/blob/master/2021-11-07.png=200x200 "出現錯誤")
 要把node更新到最新版，很多問題就解決了
 
 ### 參考筆記:
