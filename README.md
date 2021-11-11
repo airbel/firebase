@@ -28,7 +28,7 @@ firebase projects:list
 firebase init
 
 ### 安裝不成功
-<img src="2021-11-07.png" width="500" height="600">
+<img src="2021-11-07.png" width="508" height="158">
 要把node更新到最新版，很多問題就解決了
 
 ### 參考筆記:
