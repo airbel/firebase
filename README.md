@@ -1,6 +1,10 @@
 ### firebase
 練習Firebase 使用 Googlesheet
 
+下面複製貼上資料庫
+```
+1VUSl4b1r1eoNcRWotZM3e87ygkxvXltOgyDZhixqncz9lQ3MjfT1iKFw
+```
 
 ### 安裝不成功
 <img src="sheetTOKey (2).png" width="900" height="600">
