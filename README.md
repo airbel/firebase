@@ -1,5 +1,5 @@
 ### firebase
-練習Firebase
+練習Firebase 使用 Googlesheet
 
 
 連結方式
