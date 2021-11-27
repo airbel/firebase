@@ -26,11 +26,13 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 ```
 [C:\隨意]>firebase projects:list
 ```
+```
 ┌──────────────────────┬────────────────────┬────────────────┬──────────────────────┐ 
 │ Project Display Name │ Project ID         │ Project Number │ Resource Location ID │ 
 ├──────────────────────┼────────────────────┼────────────────┼──────────────────────┤ 
 │ polor-ar             │ polor-ar (current) │ xxxxxxxxxxx    │ xxxxxxxxxx           │ 
 └──────────────────────┴────────────────────┴────────────────┴──────────────────────┘ 
+```
 
 ### 把 Firebase 初始化
 ```
