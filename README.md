@@ -46,3 +46,5 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 
 ### 參考筆記:
 https://www.letswrite.tw/cloud-functions-init/
+
+(很詳細)[https://www.letswrite.tw/gas-firestore/]
