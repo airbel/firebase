@@ -39,11 +39,12 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 [C:\隨意]>firebase init
 ```
 
-### hosting   
-託管網站
+### hosting(託管網站)
 安裝方式:
+```
 firebase init hosting
-firebase deploy  << ↓↓↓會失敗，Package.json永遠搞不定，要改成↓↓↓↓
+```
+#firebase deploy  << ↓↓↓會失敗，Package.json永遠搞不定，要改成↓↓↓↓
 ```
 firebase deploy --only hosting
 ```
