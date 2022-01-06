@@ -39,7 +39,7 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 [C:\隨意]>firebase init
 ```
 
-###hosting 
+### hosting   
 託管網站
 安裝方式:
 firebase init hosting
