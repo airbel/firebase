@@ -44,7 +44,7 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 ```
 firebase init hosting
 ```
-#firebase deploy  << ↓↓↓會失敗，Package.json永遠搞不定，要改成↓↓↓↓
+# firebase deploy  << ↓↓↓會失敗，Package.json永遠搞不定，要改成↓↓↓↓
 ```
 firebase deploy --only hosting
 ```
