@@ -1,4 +1,3 @@
-//const { app } = require('firebase-admin');
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 
@@ -9,41 +8,45 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://polor-ar-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
+//上面資料讀取區~
 
+// const data = {
+//   name: 'Los Angeles',
+//   state: 'CA',
+//   country: 'USA'
+// };
 
-      // const db = getFirestore();
-      // const docRef = db.collection('users').doc('曼陀朱');
-      // var writes = docRef.set({
-      //   first: '慢',
-      //   last: 'ball',
-      //   born: 1999
-      // });
+// // Add a new document in collection "cities" with ID 'LA'
+// const res = await db.collection('cities').doc('LA').set(data);
 
-
-
-const db = getFirestore();
-var snapshot = db.collection('users').get().then(result => {
-  Array.prototype.forEach.call(result.docs, r => {
-    console.log(r.id)
-    console.log(r.data())
-  })
-
-
-
+// writed('users','sitar','瓜小董','無知','40')
+readed()
+//下面程式區~
 console.log ("hi");
-//<!----
-// function writed () {
-//     const docRef = db.collection('users').doc('孫小豬');
-//     var writes = docRef.set({
-//       first: '孫',
-//       last: 'pipick',
-//       born: 1998
-//     });
-// }
 
-// function readed(){
-//     const db = getFirestore();
-//     const snapshot = db.collection('users').get();
-//     snapshot.forEach((doc) => {
-//       console.log(doc.data);
-//     }); ---->
+function writed (dbname,dbDoc,firesname,lastname,born) {
+
+  this.dbname= dbname
+  this.dbDoc= dbDoc;
+  this.firesname= firesname;
+  this.lastname= lastname;
+  this.born= born;
+
+  const db = getFirestore();
+    const docRef = db.collection(dbname).doc(dbDoc);
+    var writes = docRef.set({
+      first: firesname,
+      last: lastname,
+      born: born
+    });
+}
+
+function readed(){
+  const db = getFirestore();
+  var snapshot = db.collection('users').get().then(result => {
+  Array.prototype.forEach.call(result.docs, r => {
+    console.log(r.id);
+    console.log(r.data());
+  })
+  })
+}
