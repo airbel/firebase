@@ -104,13 +104,6 @@ class renderFeature{
         })
     listtoHtml.innerHTML = htmlStr ;
   }
-
-      getfirebaseDate(){
-        let contant =[];
-        listContent.forEach(function(v,i){
-          contant[i]=Object.entries(v.data);
-        })
-      }
 }
 
 let rf1 = new renderFeature();
