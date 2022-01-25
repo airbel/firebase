@@ -50,3 +50,4 @@ function readed(){
   })
   })
 }
+console.log ("ok")
