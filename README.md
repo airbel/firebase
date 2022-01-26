@@ -50,6 +50,17 @@ firebase deploy --only hosting
 ```
 理論上就能通關了
 
+### 部屬網站 測試，不是真的上傳，會給一個臨時網址
+```
+firebase hosting:channel:deploy polor-ar
+```
+
+### 部屬網站方式(測試完畢再上傳)
+```
+firebase deploy --only hosting
+```
+
+
 
 
 
