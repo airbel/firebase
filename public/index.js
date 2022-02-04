@@ -91,13 +91,15 @@ class renderFeature{
         let htmlStr ='';
 
         listContent.forEach(function(v,i){
-          htmlStr = htmlStr + `
+          // htmlStr = htmlStr + `
+          htmlStr =  `
           <div id="message">
             <div>
               <p>uid:${v.uid}</p>
-              <p>內容:${Object.values(v.data)}</p>
+              <p>內容:${Object.keys(v.data)}</p>
               <p>內容str:${Object.entries(v.data)}</p>
               <p>內容Json:${JSON.stringify(v.data,0,'\t')}</p>
+              <p>長度:${i}</p>
             </div>
           </div>
            `
