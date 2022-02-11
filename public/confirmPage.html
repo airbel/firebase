@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -12,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-    <title>🐢🐢~~圭圭製菓訂單</title>
+
     <script defer src="/__/firebase/9.6.1/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/9.6.1/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/9.6.1/firebase-storage-compat.js"></script>
@@ -30,24 +31,26 @@
           body, #message { margin-top: 0; background: white; box-shadow: none; }
           body { border-top: 16px solid #ffa100; }
         }
+
       </style>
+    <title>🐢🐢~~圭圭製菓訂單確認系統</title>
 </head>
 <body>
-
-
     <div id="message">
-        <label for="fname">原味吐司:</label><br>
-        <input type="text" id="prodoctName" name="productName" value=""><br><input type="number"  min="0" value="1"><br>
-        <br>
-        <label for="fname">海鹽餐包:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br><br>
-
-        <button type="button" class="w3-btn w3-white w3-border w3-round-large" onclick="window.location.href='./index.html'"> << 首頁</button>
-        <button type="button" class="w3-btn w3-white w3-border w3-round-large" onclick="window.location.href='./confirmPage.html'"> >> 確認&查詢</button>
+    <div data-role="page" id = "name">
+        <div data-role="header" id="header" class="navbar">
+        <a href="#" data-icon="delete" id="del">刪除</a>
+            <hi>備忘錄記事本</hi>
+            <a href="#addCote" data-icon="plus" class="ui-btn-right" data-rel="dialog"
+                id="new" >新增記事本</a></div>
+                <button type="button" class="w3-btn w3-white w3-border w3-round-large" onclick="window.location.href='./bookPage.html'"> << 訂購表單</button>
+                <button type="button" class="w3-btn w3-white w3-border w3-round-large" onclick="window.location.href='./index.html'"> >> 首頁</button>
+            <div data-role="content">
+        <ui id="list" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="快速搜索"></ui>
+        </div>
     </div>
 
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
-    <script src="index.js"></script>
+</Div>
+  <script src="index.js"></script>
 </body>
 </html>
