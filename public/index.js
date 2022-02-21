@@ -1,9 +1,17 @@
+// const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+// const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+
+
 var listContent = [];
+
 
 const addbtu = document.getElementById("addbtu");
 const listtoHtml = document.getElementById("list");
 const filterName =  document.getElementById("fname");
 const filterPhone = document.getElementById("fphone");
+
+//訂單
+const BookBtu = document.getElementById("Bookbtu");
 
 //object 轉 Array;
 function objectToArray () {
@@ -113,3 +121,24 @@ let rf1 = new renderFeature();
 addbtu.addEventListener('click',function(){
     rf1.render();
     })
+
+BookBtu.addEventListener('click',function(){
+  alert ("AAAA");
+})
+
+function writedb (dbname,dbDoc,firesname,lastname,born) {
+
+  this.dbname= dbname
+  this.dbDoc= dbDoc;
+  this.firesname= firesname;
+  this.lastname= lastname;
+  this.born= born;
+
+  const db = getFirestore();
+    const docRef = db.collection(dbname).doc(dbDoc);
+    var writes = docRef.set({
+      first: firesname,
+      last: lastname,
+      born: born
+    });
+}
