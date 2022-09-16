@@ -12,7 +12,7 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 [C:\隨意]>npm install -g firebase-tools
 ```
 ```
-[C:\隨意]>firebase -V 
+[C:\隨意]>https://www.youtube.com/watch?v=ki5-oiv_WV8&list=TLPQMTMwOTIwMjKQyL45n1_5cA
 ```
 有的話 有顯示版本
 
