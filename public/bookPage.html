@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +17,7 @@
     <script defer src="/__/firebase/9.6.1/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/9.6.1/firebase-storage-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
     <style media="screen">
         body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
         #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
@@ -36,18 +37,30 @@
 
 
     <div id="message">
-        <label for="fname">原味吐司:</label><br>
-        <input type="text" id="prodoctName" name="productName" value=""><br><input type="number"  min="0" value="1"><br>
-        <br>
-        <label for="fname">海鹽餐包:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br><br>
+        <label >聯絡姓名:</label>
+        <input type="text" id="OrderName"  name="OrderName">
+
+        <label for="s_phone">聯絡方式:</label>
+        <input type="tel" id="OrderPhone" name="OrderPhone">
+
+        <label >送貨位址:</label>
+        <input type="text" id="delivery_location" name="delivery_location">
+
+        <label >原味吐司:</label>
+        <input type="number"  min="0" value="0" class="prodoctName" name="White_toast"><br>
+
+        <label >海鹽餐包:</label>
+        <input type="number"  min="0" value="0" class="prodoctName" name="Salted_Butter_Rolls"><br>
+        <a class="w3-button w3-teal" id="Bookbtu">送出訂單</a>
+
 
         <button type="button" class="w3-btn w3-white w3-border w3-round-large" onclick="window.location.href='./index.html'"> << 首頁</button>
         <button type="button" class="w3-btn w3-white w3-border w3-round-large" onclick="window.location.href='./confirmPage.html'"> >> 確認&查詢</button>
+
     </div>
 
     <p id="load">Firebase SDK Loading&hellip;</p>
 
-    <script src="index.js"></script>
+    <script src="order.js"></script>
 </body>
 </html>

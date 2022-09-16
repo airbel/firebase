@@ -1,9 +1,13 @@
 var listContent = [];
 
+
 const addbtu = document.getElementById("addbtu");
 const listtoHtml = document.getElementById("list");
 const filterName =  document.getElementById("fname");
 const filterPhone = document.getElementById("fphone");
+
+//訂單
+
 
 //object 轉 Array;
 function objectToArray () {
@@ -111,5 +115,7 @@ class renderFeature{
 let rf1 = new renderFeature();
 
 addbtu.addEventListener('click',function(){
-    rf1.render();
+  rf1.render();
     })
+
+
