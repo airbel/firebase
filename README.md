@@ -18,7 +18,7 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 
 有的話 有顯示版本
 ```
-[C:\隨意]>firebase -V
+[C:\隨意]>firebase -V 
 ```
 
 ### 看看  Firebase CLI 有沒有登入
