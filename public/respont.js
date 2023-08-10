@@ -62,7 +62,7 @@ class renderIdforuser{
     const searchN = firebase.firestore().collection('users');
     const snapshot = await searchN.where("姓名",'==',na).get();
         if (snapshot.empty){
-            responted.innerHTML = "沒資料";
+            alert ( "沒資料");
             return ;
         }
         snapshot.forEach(doc =>{
@@ -78,14 +78,20 @@ class renderIdforuser{
 }
 
 let resp1 = new renderIdforuser();
-
+var refash = false;
 respontBtu.addEventListener('click',function(){
-    if (getName ===''){
-        alert('不能空格');
-        return;
+    if (refash === true){
+        window.location.reload();
+        refash = false;
     }
-    resp1.search(getName);
-
+    if (getName === ""){
+        alert("名子不能空格");
+        refash = true;
+        return;
+    }else{
+        resp1.search(getName);
+        refash = true;}
+    // window.location.reload();
 })
 
 

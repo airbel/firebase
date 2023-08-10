@@ -4,17 +4,22 @@
 連結方式
 https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beginner-service-account-key-json-node-server-d61e803d6cc8
 
-### 看看 有沒有安裝 
+### 看看 有沒有安裝
+
+安裝 登入管理
 ```
 [C:\隨意]>npm install firebase-admin --save
 ```
+
+安裝 CLI
 ```
 [C:\隨意]>npm install -g firebase-tools
 ```
-```
-[C:\隨意]>firebase -V 
-```
+
 有的話 有顯示版本
+```
+[C:\隨意]>firebase -V
+```
 
 ### 看看  Firebase CLI 有沒有登入
 ```
@@ -25,13 +30,21 @@ https://hackernoon.com/nodejs-setup-firebase-in-4-step-tutorial-example-easy-beg
 ### 看看有無登入Firebase 專案
 ```
 [C:\隨意]>firebase projects:list
+
+如果出現 Error: Failed to list Firebase projects. See firebase-debug.log for more info.
+         HTTP Error: 401,
+解決方案
+firebase login --reauth  
+也可以登出，再登入
 ```
+
+
 ```
-┌──────────────────────┬────────────────────┬────────────────┬──────────────────────┐ 
-│ Project Display Name │ Project ID         │ Project Number │ Resource Location ID │ 
-├──────────────────────┼────────────────────┼────────────────┼──────────────────────┤ 
-│ polor-ar             │ polor-ar (current) │ xxxxxxxxxxx    │ xxxxxxxxxx           │ 
-└──────────────────────┴────────────────────┴────────────────┴──────────────────────┘ 
+┌──────────────────────┬────────────────────┬────────────────┬──────────────────────┐
+│ Project Display Name │ Project ID         │ Project Number │ Resource Location ID │
+├──────────────────────┼────────────────────┼────────────────┼──────────────────────┤
+│ polor-ar             │ polor-ar (current) │ xxxxxxxxxxx    │ xxxxxxxxxx           │
+└──────────────────────┴────────────────────┴────────────────┴──────────────────────┘
 ```
 
 ### 把 Firebase 初始化

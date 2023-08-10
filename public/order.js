@@ -65,7 +65,7 @@ BookBtu.addEventListener('click',function(){
 //   last: lastname,
 //   born: born
 
-function writedb () {
+async function writedb () {
 
     // this.dbname= dbname
     // this.dbDoc= dbDoc;
@@ -79,6 +79,6 @@ function writedb () {
         地址: delivery_location
       };
 
-
-    firebase.firestore().collection('users').doc().set(data);
+    const feback = firebase.firestore().collection('users').doc().set(data);
+    await console.log  (feback.id)
 }

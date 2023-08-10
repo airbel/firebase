@@ -7,12 +7,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script>
-        firebase.initializeApp({
-          apiKey: 'xxx',
-          authDomain: 'polor-ar.firebaseapp.com',
-          projectId: 'polor-ar'
-        });
-        const db = firebase.firestore();
+               var serviceAccount = require("path/serviceAccountKey.json");
+
+          admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+            databaseURL: "https://polor-ar-default-rtdb.asia-southeast1.firebasedatabase.app"
+          });
+
+        const db = admin.firestore();
 
         function awork(){
             // const db = firebase.firestore();
