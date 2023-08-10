@@ -1,13 +1,18 @@
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+const { initializeApp } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 
-var firebase = require("firebase-admin");
-var serviceAccount = require("./path/serviceAccountKey.json");
+var admin = require("firebase-admin");
 
-firebase.initializeApp({
-  credential : firebase.credential.cert(serviceAccount),
-  databaseURL: "https://polor-ar-default-rtdb.asia-southeast1.firebasedatabase.app/"
+var serviceAccount = require("path/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://polor-ar-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
+
+console.log("hi")
+console.log('Starting directory: ' + process.cwd());
+
 
 // var db = firebase.database();
 // var ref = db.ref("data1/-MgLb41nTlzu_0hQrObV");
@@ -17,5 +22,5 @@ firebase.initializeApp({
 // })
 
 
-console.log("hi")
-console.log('Starting directory: ' + process.cwd());
+
+
