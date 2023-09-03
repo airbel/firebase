@@ -11,42 +11,72 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
-        import { getFirestore,collection, Query, where, getDocs,addDoc } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+        import { getFirestore,collection, Query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
 
         // TODO: Replace the following with your app's Firebase project configuration
         // See: https://support.google.com/firebase/answer/7015592
+        //  離開要刪除
         const firebaseConfig = {
         
 
         };
 
-    // Initialize Firebase
+    // 初始化 鑰匙
     const app = initializeApp(firebaseConfig);
-    // Initialize Cloud Firestore and get a reference to the service
+    // 初始化雲端，取得API使用
     const db = getFirestore(app);
+    // 讀取user的資料夾
+    // var citiesCol = collection(d, 'users');
 
-    async function getCities(d) {
+    //
+    async function getallCities(d) {          
                 const citiesCol = collection(d, 'users');
                 const citySnapshot = await getDocs(citiesCol);
                 const cityList = citySnapshot.docs.map(doc => doc.data());
-                const listname = [10];
-                for (var i = 0 ; i <= 10 ; i++){
-                    if (cityList[i].姓名 !=  undefined ){
-                        listname[i] = cityList[i].姓名
-                    }
-                }
                 return console.log (cityList);
             }
-    getCities(db);
+    // getallCities(db);
 
     async function getquery(d) {
-                let citiesCol = collection(d,'users');
+            
                 const costRef = await where("姓名","==","圭圭");
                 // const query_a = costRef.where("姓名","==","圭圭");
 
                 return console.log (costRef);
-            }
-    getquery(db);
+    }
+    
+
+    const docData = {
+        姓名:"呼嚕",
+        年齡: 34,
+        地址:"水治里溫泉巷38號",
+        // 登記時間:Timestamp.formDate(new Date("1990/05/11"))
+    }
+
+    async function timest(d){
+        // const citiesCol = collection(d, 'users');
+        const citySnapshot = await addDoc(collection(d, 'users'),{
+            姓名:"東門",
+            年齡: 14,
+            地址:"法華珊路24號",        
+        });  
+        return console.log (citySnapshot.id);
+    }
+    // timest(db)
+
+    async function getdata(d,idfound){  
+        const docRef = doc(d, "users", idfound);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()){
+            console.log("內容:",docSnap.data())
+            console.log("ID:",docSnap.id)
+        } else {
+            console.log ("No such Document!")
+        }
+    }
+    getdata(db,"台北")
+    
+
     // async function setdata (){
     //     try{
     //         const docRef = await addDoc(collection(db, "users"), {
