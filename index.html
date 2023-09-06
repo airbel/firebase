@@ -11,13 +11,13 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
-        import { getFirestore,collection, Query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+        import { getFirestore,collection, Query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc,getDocFromCache} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
 
         // TODO: Replace the following with your app's Firebase project configuration
         // See: https://support.google.com/firebase/answer/7015592
         //  離開要刪除
         const firebaseConfig = {
-        
+ 
 
         };
 
@@ -36,6 +36,16 @@
                 return console.log (cityList);
             }
     // getallCities(db);
+
+    
+    async function get_specifyCities(d) {          
+                const citiesCol = collection(d, 'users');
+                const citySnapshot = await getDocs(citiesCol);
+                const cityList = citySnapshot.docs.map(doc => doc.data());
+                return console.log (cityList);
+            }
+
+    get_specifyCities(db);
 
     async function getquery(d) {
             
@@ -74,8 +84,47 @@
             console.log ("No such Document!")
         }
     }
-    getdata(db,"台北")
+    // getdata(db,"台北")
     
+    class City {
+        constructor (name ,state ,county){
+        this.name = name ;
+        this.state = state;
+        this.county = county ;
+        }
+        toString (){
+            return this.name + ','+ this.state +',' + this.county;
+        }
+    }
+    const cityConverter = {
+        toFirestore:(City) =>{
+            return {
+                name:City.name,
+                state:City.state,
+                county:City.county
+            };
+        },
+        fromFirestore:(snapshot,Options) =>{
+            const data = snapshot.data(Options);
+            return new City(data.姓名, data.state, data.county);
+        }
+    }
+    
+    async function getfilldata(d,idfound){  
+        const ref = doc(d, "users", idfound).withConverter(cityConverter);
+        const docSnap = await getDoc(ref);
+        if (docSnap.exists()) {
+        // Convert to City object
+        const city = docSnap.data();
+        // Use a City instance method
+        console.log(city.toString());
+        } else {
+        console.log("No such document!");
+        }
+    }
+    // getfilldata(db,"zA7CBWFlAwIinKeujk4p")
+
+
 
     // async function setdata (){
     //     try{
