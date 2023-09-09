@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script> -->
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <!-- <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>   -->
+    
+    <style>
+        table, th, td {            
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin: 1px;
+        padding: 10px;
+        }
+    </style>
+    
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
-        import { getFirestore,collection, Query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc,getDocFromCache} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+        import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc,getDocFromCache,updateDoc} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
 
-        // TODO: Replace the following with your app's Firebase project configuration
-        // See: https://support.google.com/firebase/answer/7015592
-        //  離開要刪除
+    //     // TODO: Replace the following with your app's Firebase project configuration
+    //     // See: https://support.google.com/firebase/answer/7015592
+    //     //  離開要刪除
         const firebaseConfig = {
- 
 
         };
 
@@ -34,25 +41,57 @@
                 const citySnapshot = await getDocs(citiesCol);
                 const cityList = citySnapshot.docs.map(doc => doc.data());
                 return console.log (cityList);
-            }
+    }
     // getallCities(db);
 
-    
-    async function get_specifyCities(d) {          
-                const citiesCol = collection(d, 'users');
-                const citySnapshot = await getDocs(citiesCol);
-                const cityList = citySnapshot.docs.map(doc => doc.data());
-                return console.log (cityList);
-            }
+    var doccollation = {
+        name:"",
+        address:"",
+        telphone:0,
+    }
 
-    get_specifyCities(db);
+    async function get_specifyCities(d,name) {                          
+                const citiesCol = collection(d, 'users');
+                const cityspecify =query(citiesCol,where("姓名" ,"==", name));
+                const collation = await getDocs(cityspecify);                                                     
+                collation.forEach((doc) => {                    
+                    doccollation.name = doc.data().姓名;
+                    doccollation.telphone = doc.data().電話;
+                    doccollation.address = doc.data().地址;
+                    // return console.log (doc.id ," =>", doc.data());
+                    return document.getElementById("boked").innerHTML += 
+                    `<table>
+                        <tr>
+                            <th>姓名</th>
+                            <th>電話</th>                           
+                            <th>地址</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                ${doc.data().姓名}
+                            </td>
+                            <td>
+                                ${doc.data().電話}
+                            </td>
+                            <td>
+                                ${doc.data().地址}
+                            </td>
+                        </tr>       
+                    </table>`
+            });             
+         }
+    get_specifyCities(db,"圭圭");
+    if (doccollation.telphone != 0)
+        console.log (doccollation.telphone);
+    else
+        console.log ("沒電話");
+    
+
 
     async function getquery(d) {
-            
-                const costRef = await where("姓名","==","圭圭");
-                // const query_a = costRef.where("姓名","==","圭圭");
-
-                return console.log (costRef);
+        const costRef = await where("姓名","==","圭圭");
+        // const query_a = costRef.where("姓名","==","圭圭");
+        return console.log (costRef);
     }
     
 
@@ -106,7 +145,7 @@
         },
         fromFirestore:(snapshot,Options) =>{
             const data = snapshot.data(Options);
-            return new City(data.姓名, data.state, data.county);
+            return new City(data.姓名, data.地址, data.county);
         }
     }
     
@@ -122,11 +161,11 @@
         console.log("No such document!");
         }
     }
-    // getfilldata(db,"zA7CBWFlAwIinKeujk4p")
+    //getfilldata(db,"kuYSsJT1M2OJwZgXngOw")
 
-
-
-    // async function setdata (){
+                 
+        
+      // async function setdata (){
     //     try{
     //         const docRef = await addDoc(collection(db, "users"), {
     //         first: "熟投",
@@ -139,14 +178,34 @@
     //     }
     // }
     // setdata();
-    </script>
+
+      
+      async function upthdata (d,id){
+        try{
+            const docRef = doc(d, "users",id);
+            const Upthisdata = await updateDoc(docRef, 
+            {
+            first: "熟投",
+            last: "棒球",
+            born: 1990
+            });
+
+        }catch (e){
+            console.error("Error adding document: ", e);
+        }
+    }
+    //   upthdata(db,"SqLbDImjU4jhYqRKw769");
+
+    
+    </script> 
 
 
 <title>Document</title>
 </head>
 <body>
-    <P>要把Firebase弄起來</P>
-    <!-- <script src="index.js"></script> -->
+    <P id="thfr">要把Firebase弄起來</P>
+    <p id="boked"></p>
+    <script src="index.js"></script>
 </body>
 </html>
 
