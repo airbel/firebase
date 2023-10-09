@@ -14,20 +14,39 @@
         border-collapse: collapse;
         margin: 1px;
         padding: 10px;
+        font-size: 24px;
+        }
+        div {
+            font-size: x-large;
+        }
+        div input{
+            font-size: 1.2rem;
         }
     </style>
     
     <script type="module">
+    
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
         import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc,getDocFromCache,updateDoc} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
-
-    //     // TODO: Replace the following with your app's Firebase project configuration
-    //     // See: https://support.google.com/firebase/answer/7015592
-    //     //  離開要刪除
+              
+        // TODO: Replace the following with your app's Firebase project configuration
+        // See: https://support.google.com/firebase/answer/7015592
+        //  離開要刪除
         const firebaseConfig = {
-
+            apiKey: "AIzaSyCsarHyN-RSBtM26l6_goiOgB7bEvZ6vi8",
+        authDomain: "polor-ar.firebaseapp.com",
+        databaseURL: "https://polor-ar-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "polor-ar",
+        storageBucket: "polor-ar.appspot.com",
+        messagingSenderId: "76946732058",
+        appId: "1:76946732058:web:e6e541c9f602cf0c8d0da3"    
         };
 
+        //格式化 HTML 顯示表格
+        var arr_dataposthere = "";
+        var arr_datatemp = "";
+        
+                
     // 初始化 鑰匙
     const app = initializeApp(firebaseConfig);
     // 初始化雲端，取得API使用
@@ -80,12 +99,6 @@
                     </table>`
             });             
          }
-    get_specifyCities(db,"圭圭");
-    if (doccollation.telphone != 0)
-        console.log (doccollation.telphone);
-    else
-        console.log ("沒電話");
-    
 
 
     async function getquery(d) {
@@ -117,13 +130,25 @@
         const docRef = doc(d, "users", idfound);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()){
+            const inerr = Object.keys(docSnap.data());
+            const inconteant = Object.values(docSnap.data());
+            inerr.forEach((v,i)=>{
+                if (v === "姓名")
+                console.log (inconteant[i])
+                if (v === "地址")
+                console.log (inconteant[i])
+                if (v==="電話")
+                console.log (inconteant[i])
+            })
+
             console.log("內容:",docSnap.data())
             console.log("ID:",docSnap.id)
         } else {
             console.log ("No such Document!")
         }
     }
-    // getdata(db,"台北")
+    
+    //getdata(db,"台北")
     
     class City {
         constructor (name ,state ,county){
@@ -179,6 +204,20 @@
     // }
     // setdata();
 
+    async function setdata (name,address,telbirehday){
+        try{
+            const docRef = await addDoc(collection(db, "users"), {
+            name: name,
+            address: address,
+            telphone: tel,
+            birehday:birehday
+            })
+
+        }catch (e){
+             console.error("Error adding document: ");
+        }
+    }
+    setdata( da_name,da_address,da_telphone,da_postData);
       
       async function upthdata (d,id){
         try{
@@ -194,8 +233,42 @@
             console.error("Error adding document: ", e);
         }
     }
-    //   upthdata(db,"SqLbDImjU4jhYqRKw769");
+    // upthdata(db,"SqLbDImjU4jhYqRKw769");
+     
+    async function getdata_a(d,idfound){  
+            const docRef = doc(d, "users", idfound);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()){
+                const inerr = Object.keys(docSnap.data());
+                const inconteant = Object.values(docSnap.data());
+                inerr.forEach((v,i)=>{
+                    if (v === "姓名")
+                    arr_datatemp = inconteant[i];
+                    
+                    if (v === "地址")
+                    arr_datatemp += inconteant[i];
+                    
+                    if (v === "電話")
+                    arr_datatemp += inconteant[i];
+                    
+                })
+            } else {
+                console.log ("No such Document!")
+            }
+        }
+        
+    // getdata(db,"台北")
 
+    function insertToHtml (){
+        // getdata_a(db,"台北");
+        const da_posttohand = document.getElementById("dataposthere");
+        const arr_dataposthere = `
+            <H3>練習看看</H3>        
+        `
+        da_posttohand.innerHTML =arr_dataposthere; 
+       }
+    // insertToHtml()
+      
     
     </script> 
 
@@ -205,7 +278,25 @@
 <body>
     <P id="thfr">要把Firebase弄起來</P>
     <p id="boked"></p>
+    <!-- <div><input type="text" id="name" value="輸入姓名" onfocus="javascript:if(this.value=='輸入姓名')this.value='';"/></div> -->
+    <div >
+        <label id="name_label" >姓名：</label>
+        <input type="text" id="name" value="輸入姓名"  onfocus="javascript:if(this.value=='輸入姓名')this.value='';"/>
+    </div>
+    <div>
+        <label id="address_label" >地址：</label>
+        <input type="text"  id="address" value="配送地址"  onfocus="javascript:if(this.value=='配送地址')this.value='';" />
+    </div>
+    <div>
+        <label id="telphone_label" >電話：</label>
+        <input type="tel"  id="telphone" value="聯絡方式" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+    </div>
+    <div><input type="button"  id="button" value="執行" onclick="getHTMLdata()"/></div>
+    <div><input type="button"  id="button2" value="執行前段" onclick="setdata()"/></div>
+    <!-- <div><input type="button"  id="button3" value="Firebase_Read" onclick="retjs()"/></div> -->
+    <div id="dataposthere">here</div>
     <script src="index.js"></script>
+    <script type="module src="/node_modules/friebase.js"></script>
 </body>
 </html>
 
