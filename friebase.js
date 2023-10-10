@@ -6,7 +6,6 @@ import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,
 // See: https://support.google.com/firebase/answer/7015592
 //  離開要刪除
 const firebaseConfig = {
- 
 };
 
 //格式化 HTML 顯示表格
