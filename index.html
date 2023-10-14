@@ -7,25 +7,8 @@
     <!-- <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>   -->
-    
-    <style>
-        table, th, td {            
-        border: 1px solid black;
-        border-collapse: collapse;
-        margin: 1px;
-        padding: 10px;
-        font-size: 24px;
-        }
-        div {
-            font-size: x-large;
-        }
-        div input{
-            font-size: 1.2rem;
-        }
-    </style>
- 
- 
-   <!-- <script type="module">
+   
+    <!-- <script type="module">
     
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
         import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc,getDocFromCache,updateDoc} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
@@ -265,12 +248,12 @@
       
     
     </script>  -->
+<link rel="stylesheet" type="text/css" href="styles.css">
 
-
-<title>Document</title>
+<title>用Freibase製作訂購單</title>
 </head>
 <body>
-    <P id="thfr">要把Firebase弄起來</P>
+    <P style="color: rgb(43, 116, 25); font-size: 1.3rem; "  id="thfr">要把Firebase弄起來</P>
     <p id="boked"></p>
     <!-- <div><input type="text" id="name" value="輸入姓名" onfocus="javascript:if(this.value=='輸入姓名')this.value='';"/></div> -->
     <div >
@@ -283,13 +266,14 @@
     </div>
     <div>
         <label id="telphone_label" >電話：</label>
-        <input type="tel"  id="telphone" value="聯絡方式" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+        <input type="tel"  id="telphone" value="聯絡方式" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onfocus="javascript:if(this.value=='聯絡方式')this.value='';">
     </div>
-    <div><input type="button"  id="button" value="執行" onclick="getHTMLdata()"/></div>
-    <div><input type="button"  id="button2" value="執行前段" onclick=""/></div>
-    <!-- <div><input type="button"  id="button3" value="Firebase_Read" onclick="retjs()"/></div> -->
+    <div><input type="button"  id="button" value="送出表單" onclick="getHTMLdata()"/></div>
+    <!-- <div><input type="button"  id="button2" value="執行前段" onclick=""/></div> -->
+    <div><input type="button"  id="button3" value="讀取資料" onclick="insertToHtml()"/></div>
+    
     <div id="dataposthere">here</div>
-    <!-- <script  src="index.js"></script> -->
+    
     <script type="module" src="index.js"></script>
 </body>
 </html>

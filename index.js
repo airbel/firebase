@@ -1,6 +1,7 @@
-import {getdata, dateNow, getHTMLdata} from "./friebase.js"
+import {dateNow,getdata, getHTMLdata,insertToHtml} from "./friebase.js"
 
 window.getHTMLdata = getHTMLdata;
+window.insertToHtml = insertToHtml;
 // const da = new Date();
 // console.log ("今天是",da.getFullYear(),"年", da.getMonth(),"月",da.getDay()+1,"日");
 // const dateNow = da.getFullYear()+"年"+ (da.getMonth()+1)+"月"+(da.getDay()+1)+"日";
