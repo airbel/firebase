@@ -6,6 +6,7 @@ import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,
 // See: https://support.google.com/firebase/answer/7015592
 //  離開要刪除
 const firebaseConfig = {
+     
 };
 
 //格式化 HTML 顯示表格
@@ -227,18 +228,63 @@ async function getdata_a(d,idfound){
 
 // getdata(db,"台北")
 
-function insertToHtml (){
-// getdata_a(db,"台北");
-const da_posttohand = document.getElementById("dataposthere");
-const arr_dataposthere = `
-    <H3>練習看看</H3>        
-`
-da_posttohand.innerHTML =arr_dataposthere; 
+export async function insertToHtml (){  
+    const da_posttohand = document.getElementById("dataposthere");
+    const docRef = doc(db, "users", "台北");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()){
+        
+        const inerr = Object.keys(docSnap.data());
+        const inconteant = Object.values(docSnap.data());
+
+
+//         let htmlStr ='';
+
+//         listContent.forEach(function(v,i){
+//           // htmlStr = htmlStr + `
+//           htmlStr =  `
+//           <div id="message">
+//             <div>
+//               <p>uid:${v.uid}</p>
+//               <p>內容:${Object.keys(v.data)}</p>
+//               <p>內容str:${Object.entries(v.data)}</p>
+//               <p>內容Json:${JSON.stringify(v.data,0,'\t')}</p>
+//               <p>長度:${i}</p>
+//             </div>
+//           </div>
+//            `
+//         })
+//     listtoHtml.innerHTML = htmlStr ;
+//   }
+        //  inerr.forEach((v,i)=>{
+        //     if (v === "姓名")
+        //     arr_datatemp = inconteant[i];
+            
+        //     if (v === "地址")
+        //     arr_datatemp += inconteant[i];
+            
+        //     if (v === "電話")
+        //     arr_datatemp += inconteant[i];
+            
+        //  })
+         const arr_dataposthere = `
+         <H3>練習看看</H3>
+         <H3>${inerr[0]}:${inconteant[0]}</H3>
+         <H3>${inerr[1]}:${inconteant[1]}</H3>        
+         <H3>${inerr[2]}:${inconteant[2]}</H3>        
+     `
+     da_posttohand.innerHTML =arr_dataposthere; 
+
+    } else {
+        console.log ("No such Document!")
+    }
+
 }
-// insertToHtml()
+
+
+
 
 export {getdata} ; 
-
 
 const da = new Date();
 console.log ("今天是",da.getFullYear(),"年", da.getMonth(),"月",da.getDay()+1,"日");
@@ -267,3 +313,4 @@ export function getHTMLdata (){
             da_postData.innerHTML= newpo;
 
 }
+
