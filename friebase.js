@@ -1,19 +1,20 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
 import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc,getDocFromCache,updateDoc} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
-      
+
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
 //  離開要刪除
 const firebaseConfig = {
-     
+
+
 };
 
 //格式化 HTML 顯示表格
 var arr_dataposthere = "";
 var arr_datatemp = "";
 
-        
+
 // 初始化 鑰匙
 const app = initializeApp(firebaseConfig);
 // 初始化雲端，取得API使用
@@ -22,7 +23,7 @@ const db = getFirestore(app);
 // var citiesCol = collection(d, 'users');
 
 //
-async function getallCities(d) {          
+async function getallCities(d) {
         const citiesCol = collection(d, 'users');
         const citySnapshot = await getDocs(citiesCol);
         const cityList = citySnapshot.docs.map(doc => doc.data());
@@ -36,20 +37,20 @@ address:"",
 telphone:0,
 }
 
-async function get_specifyCities(d,name) {                          
+async function get_specifyCities(d,name) {
         const citiesCol = collection(d, 'users');
         const cityspecify =query(citiesCol,where("姓名" ,"==", name));
-        const collation = await getDocs(cityspecify);                                                     
-        collation.forEach((doc) => {                    
+        const collation = await getDocs(cityspecify);
+        collation.forEach((doc) => {
             doccollation.name = doc.data().姓名;
             doccollation.telphone = doc.data().電話;
             doccollation.address = doc.data().地址;
             // return console.log (doc.id ," =>", doc.data());
-            return document.getElementById("boked").innerHTML += 
+            return document.getElementById("boked").innerHTML +=
             `<table>
                 <tr>
                     <th>姓名</th>
-                    <th>電話</th>                           
+                    <th>電話</th>
                     <th>地址</th>
                 </tr>
                 <tr>
@@ -62,9 +63,9 @@ async function get_specifyCities(d,name) {
                     <td>
                         ${doc.data().地址}
                     </td>
-                </tr>       
+                </tr>
             </table>`
-    });             
+    });
  }
 
 
@@ -87,13 +88,13 @@ async function timest(d){
 const citySnapshot = await addDoc(collection(d, 'users'),{
     姓名:"東門",
     年齡: 14,
-    地址:"法華珊路24號",        
-});  
+    地址:"法華珊路24號",
+});
 return console.log (citySnapshot.id);
 }
 // timest(db)
 
-async function getdata(d,idfound){  
+async function getdata(d,idfound){
 const docRef = doc(d, "users", idfound);
 const docSnap = await getDoc(docRef);
 if (docSnap.exists()){
@@ -142,7 +143,7 @@ fromFirestore:(snapshot,Options) =>{
 }
 }
 
-async function getfilldata(d,idfound){  
+async function getfilldata(d,idfound){
 const ref = doc(d, "users", idfound).withConverter(cityConverter);
 const docSnap = await getDoc(ref);
 if (docSnap.exists()) {
@@ -156,7 +157,7 @@ console.log("No such document!");
 }
 //getfilldata(db,"kuYSsJT1M2OJwZgXngOw")
 
-         
+
 
 // async function setdata (){
 //     try{
@@ -191,7 +192,7 @@ try{
 async function upthdata (d,id){
 try{
     const docRef = doc(d, "users",id);
-    const Upthisdata = await updateDoc(docRef, 
+    const Upthisdata = await updateDoc(docRef,
     {
     first: "熟投",
     last: "棒球",
@@ -204,7 +205,7 @@ try{
 }
 // upthdata(db,"SqLbDImjU4jhYqRKw769");
 
-async function getdata_a(d,idfound){  
+async function getdata_a(d,idfound){
     const docRef = doc(d, "users", idfound);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()){
@@ -213,13 +214,13 @@ async function getdata_a(d,idfound){
         inerr.forEach((v,i)=>{
             if (v === "姓名")
             arr_datatemp = inconteant[i];
-            
+
             if (v === "地址")
             arr_datatemp += inconteant[i];
-            
+
             if (v === "電話")
             arr_datatemp += inconteant[i];
-            
+
         })
     } else {
         console.log ("No such Document!")
@@ -228,12 +229,12 @@ async function getdata_a(d,idfound){
 
 // getdata(db,"台北")
 
-export async function insertToHtml (){  
+export async function insertToHtml (){
     const da_posttohand = document.getElementById("dataposthere");
     const docRef = doc(db, "users", "台北");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()){
-        
+
         const inerr = Object.keys(docSnap.data());
         const inconteant = Object.values(docSnap.data());
 
@@ -259,21 +260,21 @@ export async function insertToHtml (){
         //  inerr.forEach((v,i)=>{
         //     if (v === "姓名")
         //     arr_datatemp = inconteant[i];
-            
+
         //     if (v === "地址")
         //     arr_datatemp += inconteant[i];
-            
+
         //     if (v === "電話")
         //     arr_datatemp += inconteant[i];
-            
+
         //  })
          const arr_dataposthere = `
-         <H3>練習看看</H3>
-         <H3>${inerr[0]}:${inconteant[0]}</H3>
-         <H3>${inerr[1]}:${inconteant[1]}</H3>        
-         <H3>${inerr[2]}:${inconteant[2]}</H3>        
+        <H3>訂單資料</H3>
+        <H3>${inerr[0]}:${inconteant[0]}</H3>
+        <H3>${inerr[1]}:${inconteant[1]}</H3>
+        <H3>${inerr[2]}:${inconteant[2]}</H3>
      `
-     da_posttohand.innerHTML =arr_dataposthere; 
+     da_posttohand.innerHTML =arr_dataposthere;
 
     } else {
         console.log ("No such Document!")
@@ -284,11 +285,11 @@ export async function insertToHtml (){
 
 
 
-export {getdata} ; 
+export {getdata} ;
 
 const da = new Date();
-console.log ("今天是",da.getFullYear(),"年", da.getMonth(),"月",da.getDay()+1,"日");
-export const dateNow = da.getFullYear()+"年"+ (da.getMonth()+1)+"月"+(da.getDay()+1)+"日";
+console.log ("今天是",da.getFullYear(),"年", da.getMonth()+1,"月",da.getDate(),"日");
+export const dateNow = da.getFullYear()+"年"+ (da.getMonth()+1)+"月"+(da.getDate())+"日";
 var newpo ="";
 let getreflash = false;
 
@@ -309,8 +310,15 @@ export function getHTMLdata (){
     newpo = `<H3>${dateNow}</H3>
             <H2>${da_name}</H2>
             <H2>${da_address}</H2>
-            <H2>${da_telphone}</H2>`      
+            <H2>${da_telphone}</H2>
+            `
             da_postData.innerHTML= newpo;
+    // setdata(名子，地址，電話，日期)
+    /*
+     setdata(da_name,da_address,da_telphone,da_postData)
+
+
+    */
 
 }
 
