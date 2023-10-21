@@ -6,8 +6,7 @@ import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,
 // See: https://support.google.com/firebase/answer/7015592
 //  離開要刪除
 const firebaseConfig = {
-
-
+  
 };
 
 //格式化 HTML 顯示表格
@@ -117,7 +116,7 @@ if (docSnap.exists()){
 }
 
 getdata(db,"台北")
-
+export {getdata} ;
 
 class City {
 constructor (name ,state ,county){
@@ -178,8 +177,8 @@ try{
     const docRef = await addDoc(collection(db, "users"), {
     name: name,
     address: address,
-    telphone: tel,
-    birehday:birehday
+    telphone: telphone,
+    birehday:telbirehday
     })
 
 }catch (e){
@@ -227,7 +226,54 @@ async function getdata_a(d,idfound){
     }
 }
 
-// getdata(db,"台北")
+// getdata_a(db,"台北")
+
+
+export async function insertToHtml_v1 (){
+    const da_posttohand = document.getElementById("dataposthere");
+    const docRef = doc(db, "users", "台北");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()){
+
+        const inerr = Object.keys(docSnap.data());
+        const inconteant = Object.values(docSnap.data());
+        let htmlStr ='';
+
+        listContent.forEach(function(v,i){
+          htmlStr = htmlStr + `          
+          <div id="message">
+            <div>
+              <p>uid:${v.uid}</p>
+              <p>內容:${Object.keys(v.data)}</p>
+              <p>內容str:${Object.entries(v.data)}</p>
+              <p>內容Json:${JSON.stringify(v.data,0,'\t')}</p>
+              <p>長度:${i}</p>
+            </div>
+          </div>
+           `
+        })
+        
+        listtoHtml.innerHTML = htmlStr ;
+   
+         inerr.forEach((v,i)=>{
+            if (v === "姓名")
+            arr_datatemp = inconteant[i];
+
+            if (v === "地址")
+            arr_datatemp += inconteant[i];
+
+            if (v === "電話")
+            arr_datatemp += inconteant[i];
+         })
+    
+     da_posttohand.innerHTML =arr_dataposthere;
+
+    } else {
+        console.log ("No such Document!")
+    }
+
+}
+// insertToHtml_v1()
 
 export async function insertToHtml (){
     const da_posttohand = document.getElementById("dataposthere");
@@ -237,38 +283,7 @@ export async function insertToHtml (){
 
         const inerr = Object.keys(docSnap.data());
         const inconteant = Object.values(docSnap.data());
-
-
-//         let htmlStr ='';
-
-//         listContent.forEach(function(v,i){
-//           // htmlStr = htmlStr + `
-//           htmlStr =  `
-//           <div id="message">
-//             <div>
-//               <p>uid:${v.uid}</p>
-//               <p>內容:${Object.keys(v.data)}</p>
-//               <p>內容str:${Object.entries(v.data)}</p>
-//               <p>內容Json:${JSON.stringify(v.data,0,'\t')}</p>
-//               <p>長度:${i}</p>
-//             </div>
-//           </div>
-//            `
-//         })
-//     listtoHtml.innerHTML = htmlStr ;
-//   }
-        //  inerr.forEach((v,i)=>{
-        //     if (v === "姓名")
-        //     arr_datatemp = inconteant[i];
-
-        //     if (v === "地址")
-        //     arr_datatemp += inconteant[i];
-
-        //     if (v === "電話")
-        //     arr_datatemp += inconteant[i];
-
-        //  })
-         const arr_dataposthere = `
+        const arr_dataposthere = `
         <H3>訂單資料</H3>
         <H3>${inerr[0]}:${inconteant[0]}</H3>
         <H3>${inerr[1]}:${inconteant[1]}</H3>
@@ -279,13 +294,8 @@ export async function insertToHtml (){
     } else {
         console.log ("No such Document!")
     }
-
 }
 
-
-
-
-export {getdata} ;
 
 const da = new Date();
 console.log ("今天是",da.getFullYear(),"年", da.getMonth()+1,"月",da.getDate(),"日");
@@ -312,13 +322,9 @@ export function getHTMLdata (){
             <H2>${da_address}</H2>
             <H2>${da_telphone}</H2>
             `
-            da_postData.innerHTML= newpo;
+    da_postData.innerHTML= newpo;
     // setdata(名子，地址，電話，日期)
-    /*
-     setdata(da_name,da_address,da_telphone,da_postData)
-
-
-    */
-
+    
+    setdata(da_name,da_address,da_telphone,dateNow);
 }
 
