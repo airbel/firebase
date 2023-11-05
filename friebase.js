@@ -1,11 +1,19 @@
 
+// import { firestore } from "firebase-admin";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
 import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc,getDocFromCache,updateDoc} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
 //  離開要刪除
-const firebaseConfig = {
+const firebaseConfig = { 
+apiKey: "AIzaSyCsarHyN-RSBtM26l6_goiOgB7bEvZ6vi8",
+authDomain: "polor-ar.firebaseapp.com",
+databaseURL: "https://polor-ar-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId: "polor-ar",
+storageBucket: "polor-ar.appspot.com",
+messagingSenderId: "76946732058",
+appId: "1:76946732058:web:e6e541c9f602cf0c8d0da3"
   
 };
 
@@ -22,7 +30,7 @@ const db = getFirestore(app);
 // var citiesCol = collection(d, 'users');
 
 //
-async function getallCities(d) {
+export async function getallCities(d) {
         const citiesCol = collection(d, 'users');
         const citySnapshot = await getDocs(citiesCol);
         const cityList = citySnapshot.docs.map(doc => doc.data());
@@ -328,3 +336,43 @@ export function getHTMLdata (){
     setdata(da_name,da_address,da_telphone,dateNow);
 }
 
+
+export async function getIdList (){
+     
+    // const citiesCol = collection(d, 'users');
+    // const citySnapshot = await getDocs(citiesCol);
+    // const cityList = citySnapshot.docs.map(doc => doc.data());
+    const docList = document.getElementById("listdataID");
+    const docRef = collection(db, "users");
+    const docSnap = await getDocs(docRef);
+    console.log (docSnap.docs.values().exists ? 1 : 2)
+    // const logout =  docSnap.docs.forEach((v,i) =>{
+    //     console.log(Object.keys(v.data()))
+    //     console.log(Object.values(v.data()))
+    // })
+    // if (docSnap.exists){
+    //     docSnap.forEach((doc) =>{
+    //         const docData = doc.data();
+    //         const docID = doc.id;
+    //         const docName = docData.name;
+    
+            // 創建一個選項元素
+            // const option = document.createElement("option");
+            // option.value = docID;
+            // option.text = `Document ID: ${docID}, Document Name: ${docName}`;
+    
+            // 添加選項到選擇框
+            // docList.appendChild(option);
+            
+    //     })
+    //     console.log ("option!")
+    // } else {
+    //     console.log ("No such Document!")
+    // }
+ }
+
+/*{ <select style="width: auto; font-size: 1.2rem;">
+<option value="0">第一無極法天雷</option>
+<option value="1">絕地</option>
+<option value="3">OO</option>
+</select> )*/
