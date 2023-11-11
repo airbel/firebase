@@ -1,7 +1,7 @@
 
 // import { firestore } from "firebase-admin";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
-import { getFirestore,collection, query, where, getDocs,addDoc,setDoc,Timestamp,doc,getDoc,getDocFromCache,updateDoc} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+import { getFirestore,collection, query, where, doc,getDoc,getDocs,addDoc,updateDoc,setDoc,Timestamp,} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
@@ -123,7 +123,7 @@ if (docSnap.exists()){
 }
 }
 
-getdata(db,"台北")
+// getdata(db,"台北")
 export {getdata} ;
 
 class City {
@@ -162,7 +162,7 @@ console.log(city.toString());
 console.log("No such document!");
 }
 }
-//getfilldata(db,"kuYSsJT1M2OJwZgXngOw")
+//      (db,"kuYSsJT1M2OJwZgXngOw")
 
 
 
@@ -345,34 +345,92 @@ export async function getIdList (){
     const docList = document.getElementById("listdataID");
     const docRef = collection(db, "users");
     const docSnap = await getDocs(docRef);
-    console.log (docSnap.docs.values().exists ? 1 : 2)
+    docSnap.docs ? docList.innerHTML = '有物件' : docList.innerHTML = '空'
     // const logout =  docSnap.docs.forEach((v,i) =>{
     //     console.log(Object.keys(v.data()))
     //     console.log(Object.values(v.data()))
     // })
     // if (docSnap.exists){
-    //     docSnap.forEach((doc) =>{
-    //         const docData = doc.data();
-    //         const docID = doc.id;
-    //         const docName = docData.name;
+    if (docSnap.docs){
+        docSnap.forEach((doc) =>{
+            const docData = doc.data();
+            const docID = doc.id;
+            const docName = docData.name;
     
             // 創建一個選項元素
-            // const option = document.createElement("option");
-            // option.value = docID;
-            // option.text = `Document ID: ${docID}, Document Name: ${docName}`;
+            const option = document.createElement("option");
+            option.value = docID;
+
+            option.text += `ID: ${docID}, \t\n Name: ${docName}`;
     
             // 添加選項到選擇框
-            // docList.appendChild(option);
+            docList.appendChild(option);
             
-    //     })
-    //     console.log ("option!")
-    // } else {
-    //     console.log ("No such Document!")
-    // }
+        })
+        // console.log ("option!")
+    } else {
+        console.log ("No such Document!")
+    }
  }
 
-/*{ <select style="width: auto; font-size: 1.2rem;">
-<option value="0">第一無極法天雷</option>
-<option value="1">絕地</option>
-<option value="3">OO</option>
-</select> )*/
+ async function getKeyList(d,idfound){
+    const docRef = doc(d, "users", idfound);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()){
+        const inerr = Object.keys(docSnap.data());
+        const inconteant = Object.values(docSnap.data());
+        let incrent = inerr.length;
+        inerr.forEach((v,i)=>{
+            
+            console.log (inerr[i])
+        })
+        console.log("內容:",docSnap.data())
+        console.log("數量",incrent)
+    } else {
+        console.log ("No such Document!","沒資料")
+    }
+    }
+
+const docselet = document.getElementById("listdataID");
+docselet.addEventListener ("change", function(){
+    const selectedValue = docselet.value;
+    getKeyList (db,selectedValue)
+    console.log ("選擇ID:" + selectedValue )
+})
+
+const cardsContainer = document.getElementById("cards-container");
+
+// // 讀取 Firestore 中的文檔
+// async function get_specifyCities(d,name) {
+//     const citiesCol = collection(d, 'users');
+//     const cityspecify =query(citiesCol,where("姓名" ,"==", name));
+//     const collation = await getDocs(cityspecify);
+//     collation.forEach((doc) => {
+//         doccollation.name = doc.data().姓名;
+//         doccollation.telphone = doc.data().電話;
+//         doccollation.address = doc.data().地址;
+//         // return console.log (doc.id ," =>", doc.data());
+//         return document.getElementById("boked").innerHTML +=
+
+
+const dbr= collection(db,"users");
+    const collatione = await getDocs(dbr);
+        collatione.forEach((doc) => {
+            const docData = doc.data();
+            
+            // 創建卡片元素
+            const card = document.createElement("div");
+            card.classList.add("card");
+            
+            // 將文檔資訊填充到卡片中
+            card.innerHTML = `
+                <h2>${docData.姓名}</h2>
+                <p>電話: ${docData.電話}</p>
+                <p>Create Date: ${docData["create-date"]}</p>
+                <p>Book Date: ${docData.book_date}</p>
+                <p>Content: ${docData.content}</p>
+            `;
+            
+        // 添加卡片到容器
+        cardsContainer.appendChild(card);
+    });
