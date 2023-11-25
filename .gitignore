@@ -8,6 +8,7 @@ firebase-debug.log*
 firebase-debug.*.log*
 .PATH/
 temp.md
+config.js
 
 # Firebase cache
 .firebase/

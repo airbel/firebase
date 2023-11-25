@@ -1,17 +1,21 @@
-
-// import { firestore } from "firebase-admin";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
 import { getFirestore,collection, query, where, doc,getDoc,getDocs,addDoc,updateDoc,setDoc,Timestamp,} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 import { getStorage,ref,listAll } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-storage.js" ;
-
+import { firebaseConfig } from './config.js';
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
 //  離開要刪除
-const firebaseConfig = { 
-
-  
-};
+// const firebaseConfig = {
+//     apiKey: "AIzaSyCsarHyN-RSBtM26l6_goiOgB7bEvZ6vi8",
+//     authDomain: "polor-ar.firebaseapp.com",
+//     databaseURL: "https://polor-ar-default-rtdb.asia-southeast1.firebasedatabase.app",
+//     projectId: "polor-ar",
+//     storageBucket:"polor-ar.appspot.com/produck/",
+//     // storageBucket: "polor-ar.appspot.com",
+//     messagingSenderId: "76946732058",
+//     appId: "1:76946732058:web:e6e541c9f602cf0c8d0da3"
+// };
 //格式化 HTML 顯示表格
 var arr_dataposthere = "";
 var arr_datatemp = "";
@@ -24,9 +28,8 @@ const db = getFirestore(app);
 
 // 初使storage，取得API使用
 const storage = getStorage(app);
-
-
-
+const storageRef = ref(storage);
+console.log (storageRef)
 // 讀取user的資料夾
 // var citiesCol = collection(d, 'users');
 
@@ -249,7 +252,7 @@ export async function insertToHtml_v1 (){
         let htmlStr ='';
 
         listContent.forEach(function(v,i){
-          htmlStr = htmlStr + `          
+          htmlStr = htmlStr + `
           <div id="message">
             <div>
               <p>uid:${v.uid}</p>
@@ -261,9 +264,9 @@ export async function insertToHtml_v1 (){
           </div>
            `
         })
-        
+
         listtoHtml.innerHTML = htmlStr ;
-   
+
          inerr.forEach((v,i)=>{
             if (v === "姓名")
             arr_datatemp = inconteant[i];
@@ -274,7 +277,7 @@ export async function insertToHtml_v1 (){
             if (v === "電話")
             arr_datatemp += inconteant[i];
          })
-    
+
      da_posttohand.innerHTML =arr_dataposthere;
 
     } else {
@@ -333,13 +336,13 @@ export function getHTMLdata (){
             `
     da_postData.innerHTML= newpo;
     // setdata(名子，地址，電話，日期)
-    
+
     setdata(da_name,da_address,da_telphone,dateNow);
 }
 
 
 export async function getIdList (){
-     
+
     // const citiesCol = collection(d, 'users');
     // const citySnapshot = await getDocs(citiesCol);
     // const cityList = citySnapshot.docs.map(doc => doc.data());
@@ -357,16 +360,16 @@ export async function getIdList (){
             const docData = doc.data();
             const docID = doc.id;
             const docName = docData.name;
-    
+
             // 創建一個選項元素
             const option = document.createElement("option");
             option.value = docID;
 
             option.text += `ID: ${docID}, \t\n Name: ${docName}`;
-    
+
             // 添加選項到選擇框
             docList.appendChild(option);
-            
+
         })
         // console.log ("option!")
     } else {
@@ -382,7 +385,7 @@ export async function getIdList (){
         const inconteant = Object.values(docSnap.data());
         let incrent = inerr.length;
         inerr.forEach((v,i)=>{
-            
+
             console.log (inerr[i])
         })
         console.log("內容:",docSnap.data())
@@ -422,11 +425,11 @@ const cardsContainer = document.getElementById("cards-container");
 const dbr= collection(db,"users");
 const collatione = await getDocs(dbr);
       collatione.forEach((doc) => {
-      const docData = doc.data();         
+      const docData = doc.data();
         // 創建卡片元素
         const card = document.createElement("div");
         card.classList.add("card");
-            
+
         // 將文檔資訊填充到卡片中
         card.innerHTML = `
                  <h2>${docData.姓名}</h2>
@@ -441,10 +444,10 @@ const collatione = await getDocs(dbr);
 
 const showimage = document.getElementById("showimage");
 
-const storageget = getStorage(app,"gs://polor-ar.appspot.com/produck/");
+// const storageget = getStorage(app,"gs://polor-ar.appspot.com/produck/");
 // const storageget = storage('gs://polor-ar.appspot.com/produck/')
 
 const itemImage = new Image (200,200);
-itemImage.image.src = storageget;
-showimage.appendChild = itemImage;
+// itemImage.src = storageget;
+showimage.innerHTML="123";
 // gsutil -m acl ch -r -u service-<project number>@gcp-sa-firebasestorage.iam.gserviceaccount.com gs://polor-ar.appspot.com/produck/
