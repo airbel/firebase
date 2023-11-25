@@ -1,7 +1,9 @@
 
 // import { firestore } from "firebase-admin";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
-import { getFirestore,collection, query, where, doc,getDoc,getDocs,addDoc,updateDoc,setDoc,Timestamp,} from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+import { getFirestore,collection, query, where, doc,getDoc,getDocs,addDoc,updateDoc,setDoc,Timestamp,} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
+import { getStorage,ref,listAll } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-storage.js" ;
+
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://support.google.com/firebase/answer/7015592
@@ -10,7 +12,6 @@ const firebaseConfig = {
 
   
 };
-
 //格式化 HTML 顯示表格
 var arr_dataposthere = "";
 var arr_datatemp = "";
@@ -20,6 +21,12 @@ var arr_datatemp = "";
 const app = initializeApp(firebaseConfig);
 // 初始化雲端，取得API使用
 const db = getFirestore(app);
+
+// 初使storage，取得API使用
+const storage = getStorage(app);
+
+
+
 // 讀取user的資料夾
 // var citiesCol = collection(d, 'users');
 
@@ -392,39 +399,52 @@ docselet.addEventListener ("change", function(){
     console.log ("選擇ID:" + selectedValue )
 })
 
+
+
+/* 讀取 Firestore 中的文檔 還沒改好
+async function read_sthings(d,name) {
+    const citiesCol = collection(d, 'users');
+    const cityspecify =query(citiesCol,where("姓名" ,"==", name));
+    const collation = await getDocs(cityspecify);
+    collation.forEach((doc) => {
+        doccollation.name = doc.data().姓名;
+        doccollation.telphone = doc.data().電話;
+        doccollation.address = doc.data().地址;
+         return console.log (doc.id ," =>", doc.data());
+        //return document.getElementById("boked").innerHTML +=
+    })
+
+ */
+
+ /*
+ // 用卡片方式把資料列出來
 const cardsContainer = document.getElementById("cards-container");
-
-// // 讀取 Firestore 中的文檔
-// async function get_specifyCities(d,name) {
-//     const citiesCol = collection(d, 'users');
-//     const cityspecify =query(citiesCol,where("姓名" ,"==", name));
-//     const collation = await getDocs(cityspecify);
-//     collation.forEach((doc) => {
-//         doccollation.name = doc.data().姓名;
-//         doccollation.telphone = doc.data().電話;
-//         doccollation.address = doc.data().地址;
-//         // return console.log (doc.id ," =>", doc.data());
-//         return document.getElementById("boked").innerHTML +=
-
-
 const dbr= collection(db,"users");
-    const collatione = await getDocs(dbr);
-        collatione.forEach((doc) => {
-            const docData = doc.data();
+const collatione = await getDocs(dbr);
+      collatione.forEach((doc) => {
+      const docData = doc.data();         
+        // 創建卡片元素
+        const card = document.createElement("div");
+        card.classList.add("card");
             
-            // 創建卡片元素
-            const card = document.createElement("div");
-            card.classList.add("card");
-            
-            // 將文檔資訊填充到卡片中
-            card.innerHTML = `
-                <h2>${docData.姓名}</h2>
-                <p>電話: ${docData.電話}</p>
-                <p>Create Date: ${docData["create-date"]}</p>
-                <p>Book Date: ${docData.book_date}</p>
-                <p>Content: ${docData.content}</p>
-            `;
-            
+        // 將文檔資訊填充到卡片中
+        card.innerHTML = `
+                 <h2>${docData.姓名}</h2>
+                 <p>電話: ${docData.電話}</p>
+                 <p>Create Date: ${docData["create-date"]}</p>
+                 <p>Book Date: ${docData.book_date}</p>
+                 <p>Content: ${docData.content}</p>`;
         // 添加卡片到容器
         cardsContainer.appendChild(card);
-    });
+});
+*/
+
+const showimage = document.getElementById("showimage");
+
+const storageget = getStorage(app,"gs://polor-ar.appspot.com/produck/");
+// const storageget = storage('gs://polor-ar.appspot.com/produck/')
+
+const itemImage = new Image (200,200);
+itemImage.image.src = storageget;
+showimage.appendChild = itemImage;
+// gsutil -m acl ch -r -u service-<project number>@gcp-sa-firebasestorage.iam.gserviceaccount.com gs://polor-ar.appspot.com/produck/
