@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
 import { getFirestore,collection, query, where, doc,getDoc,getDocs,addDoc,updateDoc,setDoc,Timestamp,} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
-import { getStorage,ref,listAll } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-storage.js" ;
+import { getStorage,ref,listAll,getDownloadURL} from "https://www.gstatic.com/firebasejs/10.6.0/firebase-storage.js" ;
 import { firebaseConfig } from './config.js';
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -20,9 +20,37 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // 初使storage，取得API使用
-const storage = getStorage(app);
-const storageRef = ref(storage);
-console.log (storageRef)
+// const storage = getStorage(app);
+// const storageRef = ref(storage,'gs://polor-ar.appspot.com/produck/');
+// const listall = listAll(storageRef);
+// console.log (listall.toString())
+
+async function pageTokenExample(){
+    // Create a reference under which you want to list
+    const storage = getStorage(app);
+    const listRef = ref(storage, 'gs://polor-ar.appspot.com/produck/');
+    const listRefsrc = ref(storage, 'produck/2020-12-03 13.35.28.jpg');
+    const imagesRef = listRefsrc.parent;
+    console.log (listRefsrc.name)
+    // Fetch the first page of 100.
+    const firstPage = await list(listRef, { maxResults: 100 });
+        // Use the result.
+        console.log (listAll(listRef))
+    //   processItems(firstPage.items)
+    //   processPrefixes(firstPage.prefixes)
+  
+    // Fetch the second page if there are more elements.
+    if (firstPage.nextPageToken) {
+      const secondPage = await list(listRef, {
+        maxResults: 100,
+        pageToken: firstPage.nextPageToken,
+      });
+        processItems(secondPage.items)
+    //   processPrefixes(secondPage.prefixes)
+    }
+  }
+// pageTokenExample();
+
 // 讀取user的資料夾
 // var citiesCol = collection(d, 'users');
 
@@ -437,10 +465,17 @@ const collatione = await getDocs(dbr);
 
 const showimage = document.getElementById("showimage");
 
-// const storageget = getStorage(app,"gs://polor-ar.appspot.com/produck/");
-// const storageget = storage('gs://polor-ar.appspot.com/produck/')
+async function getimage(){
+    const storage = getStorage();
+    const storageRef = ref(storage,'produck/2020-12-03 13.35.28.jpg');
+    const url =await getDownloadURL(storageRef);    
+    const image = document.createElement("img");
+    image.classList.add("image");
+    image.innerHTML =`
+    <img src="${url}"/>
+    `
+    showimage.append(image);
+    //console.log (typeof(ctx))
+}
 
-const itemImage = new Image (200,200);
-// itemImage.src = storageget;
-showimage.innerHTML="123";
-// gsutil -m acl ch -r -u service-<project number>@gcp-sa-firebasestorage.iam.gserviceaccount.com gs://polor-ar.appspot.com/produck/
+getimage()
