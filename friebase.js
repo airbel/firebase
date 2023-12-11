@@ -398,6 +398,7 @@ export async function getIdList (){
     }
  }
 
+ //選擇ID 讀出資料
  async function getKeyList(d,idfound){
     const docRef = doc(d, "users", idfound);
     const docSnap = await getDoc(docRef);
@@ -406,15 +407,16 @@ export async function getIdList (){
         const inconteant = Object.values(docSnap.data());
         let incrent = inerr.length;
         inerr.forEach((v,i)=>{
+            console.log (inerr[i]+":"+inconteant[i])
+            
 
-            console.log (inerr[i])
         })
         console.log("內容:",docSnap.data())
         console.log("數量",incrent)
     } else {
         console.log ("No such Document!","沒資料")
     }
-    }
+}
 
 const docselet = document.getElementById("listdataID");
 docselet.addEventListener ("change", function(){
@@ -422,6 +424,8 @@ docselet.addEventListener ("change", function(){
     getKeyList (db,selectedValue)
     console.log ("選擇ID:" + selectedValue )
 })
+
+//讀出資料後用卡片呈現
 
 
 
@@ -465,7 +469,9 @@ const collatione = await getDocs(dbr);
 
 const showimage = document.getElementById("showimage");
 
+//繪製圖片
 async function getimage(){
+    const showimage = document.getElementById("showimage");
     const storage = getStorage();
     const storageRef = ref(storage,'produck/2020-12-03 13.35.28.jpg');
     const url =await getDownloadURL(storageRef);    
@@ -475,7 +481,25 @@ async function getimage(){
     <img src="${url}"/>
     `
     showimage.append(image);
-    //console.log (typeof(ctx))
+    console.log (typeof(ctx))
 }
 
-getimage()
+//繪製圖片 並且切割
+export async function draw (){    
+    const storage = getStorage();
+    const storageRef = ref(storage,'produck/2020-12-03 13.35.28.jpg');
+    const url =await getDownloadURL(storageRef);    
+
+    const cavas = document.getElementById("tutorial");
+    var img = new Image();
+    if(cavas.getContext){
+        var ctx= cavas.getContext("2d");
+        
+        img.onload = function () {
+        ctx.drawImage(img, 500,800,500,650,0,0,400,650)
+        
+        }
+    }
+    img.src = url;
+}
+
