@@ -364,18 +364,11 @@ export function getHTMLdata (){
 
 export async function getIdList (){
 
-    // const citiesCol = collection(d, 'users');
-    // const citySnapshot = await getDocs(citiesCol);
-    // const cityList = citySnapshot.docs.map(doc => doc.data());
+
     const docList = document.getElementById("listdataID");
     const docRef = collection(db, "users");
     const docSnap = await getDocs(docRef);
     docSnap.docs ? docList.innerHTML = '有物件' : docList.innerHTML = '空'
-    // const logout =  docSnap.docs.forEach((v,i) =>{
-    //     console.log(Object.keys(v.data()))
-    //     console.log(Object.values(v.data()))
-    // })
-    // if (docSnap.exists){
     if (docSnap.docs){
         docSnap.forEach((doc) =>{
             const docData = doc.data();
@@ -392,7 +385,6 @@ export async function getIdList (){
             docList.appendChild(option);
 
         })
-        // console.log ("option!")
     } else {
         console.log ("No such Document!")
     }
@@ -402,17 +394,23 @@ export async function getIdList (){
  async function getKeyList(d,idfound){
     const docRef = doc(d, "users", idfound);
     const docSnap = await getDoc(docRef);
+    const cardsContainer = document.getElementById("cards-container");
     if (docSnap.exists()){
         const inerr = Object.keys(docSnap.data());
         const inconteant = Object.values(docSnap.data());
         let incrent = inerr.length;
+        const card = document.createElement("div");
+        card.classList.add("card");
         inerr.forEach((v,i)=>{
             console.log (inerr[i]+":"+inconteant[i])
-            
-
+            // 將文檔資訊填充到卡片中,規劃中  
+            card.innerHTML += `
+            <h2>${inerr[i]+":"+inconteant[i]}</h2>
+            `          
         })
-        console.log("內容:",docSnap.data())
-        console.log("數量",incrent)
+        // console.log("內容:",docSnap.data())
+        cardsContainer.appendChild(card);
+        console.log(incrent+"筆資料")
     } else {
         console.log ("No such Document!","沒資料")
     }
