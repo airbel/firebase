@@ -1,5 +1,7 @@
 *{
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 
 }
 
@@ -35,9 +37,35 @@ div button{
 
 
 .card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 18px;
+    padding: 12px;
     margin: 10px;
-    width: 300px;
+    width: 450px;
+    display: inline-flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+
 }
+
+.content {
+    position:absolute;
+    border:1px solid #ccc;
+}
+.icon-container {
+    border: 1px solid #ccc;
+    position:relative;
+    padding:0;
+    /* padding-left: 320px; */
+    align-content: Top;
+    /* flex-direction: column;      */
+    
+}
+
+.plus-icon {
+    width: 20px; /* 設定圖標的寬度 */
+    height: 20px; /* 設定圖標的高度 */
+    /* 其他樣式屬性... */
+}
+

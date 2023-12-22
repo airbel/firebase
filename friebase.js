@@ -398,22 +398,46 @@ export async function getIdList (){
     if (docSnap.exists()){
         const inerr = Object.keys(docSnap.data());
         const inconteant = Object.values(docSnap.data());
-        let incrent = inerr.length;
-        const card = document.createElement("div");
+        let incrent = inerr.length;        
+        
+        const card = document.createElement("div");    
         card.classList.add("card");
+
+        card.innerHTML +=`
+        <div class="icon-container">                
+        <a href="#"><span class="material-symbols-outlined">arrow_circle_right</span></a>
+        <a href="#"><span class="material-symbols-outlined">power_settings_new</span></a>
+        <a href="#"><span class="material-symbols-outlined">add</span></a>
+        </div>
+        <div class="content">`;
+
         inerr.forEach((v,i)=>{
             console.log (inerr[i]+":"+inconteant[i])
             // 將文檔資訊填充到卡片中,規劃中  
-            card.innerHTML += `
-            <h2>${inerr[i]+":"+inconteant[i]}</h2>
+            card.innerHTML += `        
+            <p>${inerr[i]+":"+inconteant[i]}</p>            
             `          
         })
+        card.innerHTML += `</div>`;
+                      
         // console.log("內容:",docSnap.data())
         cardsContainer.appendChild(card);
         console.log(incrent+"筆資料")
     } else {
         console.log ("No such Document!","沒資料")
     }
+}
+
+export function deleteCAList (){
+    const cardsContainer = document.getElementById("cards-container");
+    const indexToRemove = 0; // 要刪除的卡片的索引，這裡假設是第一個卡片
+    const cardToRemove = cardsContainer.children[indexToRemove];
+
+    if (cardToRemove) {
+        // 檢查卡片是否存在，避免無效的索引
+        cardsContainer.removeChild(cardToRemove);
+    }
+
 }
 
 const docselet = document.getElementById("listdataID");
